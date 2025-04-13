@@ -3,9 +3,9 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import iziToast from 'izitoast';
 import 'izitoast/dist/css/iziToast.min.css';
 
-
 const gallery = document.querySelector('.gallery');
-let lightbox = new SimpleLightbox('.gallery a', {
+
+export let lightbox = new SimpleLightbox('.gallery a', {
     captionsData: 'alt',
     captionDelay: 250,
 });
@@ -27,12 +27,10 @@ export function createGallery(images) {
             </li>
             `;
         })
-        .join('');
-
-    gallery.innerHTML = markup;
+        .join('');  
+    gallery.insertAdjacentHTML('beforeend', markup);
     lightbox.refresh();
 }
-
 
 export function clearGallery() {
     gallery.innerHTML = '';
@@ -41,14 +39,23 @@ export function clearGallery() {
 export function showLoader() {
     document.querySelector('.loader').classList.remove('hidden');
 }
+
 export function hideLoader() {
     document.querySelector('.loader').classList.add('hidden');
 }
 
+export function showLoadMoreButton() {
+    document.querySelector('.load-more').classList.remove('hidden');
+}
+
+export function hideLoadMoreButton() {
+    document.querySelector('.load-more').classList.add('hidden');
+}
 
 export function showInfoMessage(message) {
     iziToast.info({ message });
 }
+
 export function showErrorMessage(message) {
     iziToast.error({ message });
 }
